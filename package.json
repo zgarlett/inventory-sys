@@ -1,30 +1,20 @@
 {
-  "name": "vite-react-typescript-starter",
+  "name": "stockroom-inventory",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "workspaces": [
+    "shared",
+    "backend",
+    "frontend"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "predev": "npm run build -w @inventory/shared",
+    "dev": "concurrently -k -n api,web -c blue,green \"npm run dev -w @inventory/backend\" \"npm run dev -w @inventory/frontend\"",
+    "build": "npm run build -w @inventory/shared && npm run build -w @inventory/backend && npm run build -w @inventory/frontend",
+    "start": "npm run start -w @inventory/backend"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "@types/node": "^24.12.0",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "eslint": "^9.39.4",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.4.0",
-    "typescript": "~5.9.3",
-    "typescript-eslint": "^8.57.0",
-    "vite": "^8.0.0"
+    "concurrently": "^9.1.2"
   }
 }
